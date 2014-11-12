@@ -33,6 +33,7 @@ var GameConfig = {
 
 	EXCLUDE: [
 		".gitignore",
+		".nojekyll",
 		"CNAME",
 		"index_backup.html",
 		"LICENSE.md",
