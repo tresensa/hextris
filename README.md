@@ -15,3 +15,6 @@ Original version of the game located at https://github.com/Hextris/hextris
 ## License
 
 The game source code is covered under a GPL v3 license. The TreSensa libraries are not.
+
+More information on TreSensa game distribution services located at http://www.tresensa.com/developers/
+Developer technical resources, such as tutorials and API documentation located at http://developer.tresensa.com/
