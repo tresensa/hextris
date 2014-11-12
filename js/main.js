@@ -35,6 +35,19 @@ function toggleDevTools() {
     $('#devtools').toggle();
 }
 
+// TreSensa integration
+function removeWidget(callback) {
+    if(widget != null)
+    {
+        widget.close(callback);
+        widget = null;
+    }
+    else
+    {
+        callback();
+    }
+}
+
 function resumeGame() {
     gameState = 1;
     hideUIElements();
@@ -153,7 +166,9 @@ function init(b) {
 
     MainHex.texts = []; //clear texts
     MainHex.delay = 15;
-    hideText();
+    // TreSensa integration
+    // hideText();
+    removeWidget(hideText);
 }
 
 function addNewBlock(blocklane, color, iter, distFromHex, settled) { //last two are optional parameters

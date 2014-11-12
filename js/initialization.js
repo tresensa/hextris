@@ -4,6 +4,9 @@ $(document).ready(function() {
 });
 
 function showbottombar() {
+    // TreSensa integration
+    return;
+
     var isOffline = 'onLine' in navigator && !navigator.onLine;
     if (isOffline) {
         setTimeout(showbottombar, 1000);
@@ -189,6 +192,9 @@ function initialize(a) {
         });
 
         addKeyListeners();
+
+        // TreSensa integration
+        /*
         (function(i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function() {
@@ -201,6 +207,7 @@ function initialize(a) {
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
         ga('create', 'UA-51272720-1', 'teamsnowman.github.io');
         ga('send', 'pageview');
+        */
 
         document.addEventListener("pause", handlePause, false);
         document.addEventListener("backbutton", handlePause, false);
@@ -280,7 +287,9 @@ function startBtnHandler() {
     }
 
     if (importing == 1) {
-        init(1);
+        // TreSensa integration
+        // init(1);
+        removeWidget(init.bind(null,1));
     } else {
         resumeGame();
     }
@@ -293,11 +302,15 @@ function handlePause() {
 }
 
 function handleTap(e) {
-    handleClickTap(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+    // TreSensa integration
+    // handleClickTap(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+    handleClickTap(e.changedTouches[0].clientX, e.changedTouches[0].clientY, e);
 }
 
 function handleClick(e) {
-    handleClickTap(e.clientX, e.clientY);
+    // TreSensa integration
+    // handleClickTap(e.clientX, e.clientY);
+    handleClickTap(e.clientX, e.clientY, e);
 }
 
 function handleTapBefore(e) {

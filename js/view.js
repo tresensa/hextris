@@ -100,7 +100,9 @@ function showText(text) {
         'paused': "<div class='centeredHeader unselectable'>Paused</div><br><div class='unselectable centeredSubHeader'>Press p to resume</div><div style='height:100px;line-height:100px;cursor:pointer;'></div>",
         'pausedAndroid': "<div class='centeredHeader unselectable'>Paused</div><br><div class='unselectable centeredSubHeader'>Press <i class='fa fa-play'></i> to resume</div><div style='height:100px;line-height:100px;cursor:pointer;'></div><div class='unselectable centeredSubHeader' style='margin-top:-50px;'><a href = 'market://details?id=com.hextris.hextrisadfree' target='_blank'>Don't like ads? Want to support the developer? Tap for the ad-free version.</a></div>",
         'start': "<div class='centeredHeader unselectable' style='line-height:80px;'>Press enter to start</div>",
-        'gameover': "<div class='centeredHeader unselectable'> Game Over: " + score + " pts</div><br><div style='font-size:24px;' class='centeredHeader unselectable'> High Scores:</div><table class='tg' style='margin:0px auto'> "
+        // TreSensa Integration
+        // 'gameover': "<div class='centeredHeader unselectable'> Game Over: " + score + " pts</div><br><div style='font-size:24px;' class='centeredHeader unselectable'> High Scores:</div><table class='tg' style='margin:0px auto'> "
+        'gameover': "<div class='centeredHeader unselectable absolute'> Game Over: " + score + " pts</div>"
     };
 
     if (text == 'paused') {
@@ -113,11 +115,14 @@ function showText(text) {
         var allZ = 1;
         var i;
 
-        for (i = 0; i < 3; i++) {
-            if (highscores.length > i) {
-                messages['gameover'] += "<tr> <th class='tg-031e'>" + (i + 1) + ".</th> <th class='tg-031e'>" + highscores[i] + " pts</th> </tr>";
-            }
-        }
+        // TreSensa Integration
+        /*
+         for (i = 0; i < 3; i++) {
+         if (highscores.length > i) {
+         messages['gameover'] += "<tr> <th class='tg-031e'>" + (i + 1) + ".</th> <th class='tg-031e'>" + highscores[i] + " pts</th> </tr>";
+         }
+         }
+         */
 
         var restartText;
         if (settings.platform == 'mobile') {
@@ -126,7 +131,9 @@ function showText(text) {
             restartText = 'Press enter (or click anywhere!) to restart!';
         }
 
-        messages['gameover'] += "</table><br><div class='unselectable centeredSubHeader' id = 'tapToRestart'>" + restartText + "</div>";
+        // TreSensa Integration
+        // messages['gameover'] += "</table><br><div class='unselectable centeredSubHeader' id = 'tapToRestart'>" + restartText + "</div>";
+        messages['gameover'] += "<br><div class='unselectable centeredSubHeader absolute' id = 'tapToRestart'>" + restartText + "</div>";
         if (allZ) {
             for (i = 0; i < highscores.length; i++) {
                 if (highscores[i] !== 0) {
@@ -135,7 +142,9 @@ function showText(text) {
             }
         }
     }
-    messages['gameover'] += "<div class='fltrt' id='tweetStuff'><a class='tweet' href='https://twitter.com/intent/tweet?text=Can you beat my score of "+ score +" points at&button_hashtag=hextris ? http://hextris.github.io/hextris @hextris' data-lang='en' data-related='hextris:hextris' target='_blank'>Share Your Score on Twitter!!!</a></div>"
+
+    // TreSensa Integration
+    // messages['gameover'] += "<div class='fltrt' id='tweetStuff'><a class='tweet' href='https://twitter.com/intent/tweet?text=Can you beat my score of "+ score +" points at&button_hashtag=hextris ? http://hextris.github.io/hextris @hextris' data-lang='en' data-related='hextris:hextris' target='_blank'>Share Your Score on Twitter!!!</a></div>"
     $(".overlay").html(messages[text]);
     $(".overlay").fadeIn("1000", "swing");
 
@@ -168,11 +177,38 @@ function hideText() {
 }
 
 function gameOverDisplay() {
-    $("#attributions").show();
+    // TreSensa Integration
+    // $("#attributions").show();
+    $("#attributions").hide();
     var c = document.getElementById("canvas");
     c.className = "blur";
     showText('gameover');
     showbottombar();
+    // TreSensa Integration
+    TGS.Leaderboard.SubmitScore({
+        score: score,
+        leaderboardID: 1
+    });
+    widget = createTresensaWidget();
+}
+
+// TreSensa integration
+var widget = null;
+function createTresensaWidget() {
+    var placementFunc = function () {
+        return {
+            // x: (window.innerWidth/4) * settings.scale,
+            // y: (window.innerHeight/4) * settings.scale,
+            x: (window.innerWidth / 2) - 150 * settings.scale,
+            y: (window.innerHeight / 2) - 187 * settings.scale,
+            scale:  settings.scale
+        };
+    };
+    return TGS.Widget.CreateWidget({
+        shareMessage: "I just scored " + score + " on Hextris!",
+        leaderboardID: 1,
+        placementFunc: placementFunc
+    });
 }
 
 function pause(o) {

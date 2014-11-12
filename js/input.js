@@ -66,7 +66,9 @@ function addKeyListeners() {
         keys: "enter",
         on_keydown: function() {
             if (gameState==2 || gameState==1 || importing == 1) {
-                init(1);
+                // TreSensa integration
+                // init(1);
+                removeWidget(init.bind(null,1));
             }
             if (gameState===0) {
                 resumeGame();
@@ -115,13 +117,17 @@ function addKeyListeners() {
 
     if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         $("#restartBtn").on('touchstart', function() {
-            init(1);
+            // TreSensa integration
+            // init(1);
+            removeWidget(init.bind(null,1));
             canRestart = false;
         });
     }
     else {
         $("#restartBtn").on('mousedown', function() {
-            init(1);
+            // TreSensa integration
+            // init(1);
+            removeWidget(init.bind(null,1));
             canRestart = false;
         });
     }
@@ -145,7 +151,15 @@ function inside (point, vs) {
     return inside;
 };
 
-function handleClickTap(x,y) {
+// TreSensa integration
+// function handleClickTap(x,y) {
+function handleClickTap(x,y,e) {
+    // TreSensa integration
+    // ignore clicks on TGS ads or widget
+    if($(e.target).closest("#tgs_ad_overlay, #tgs-widget").size()) {
+        return;
+    }
+
     if (x < 120 && y < 50 && $('.helpText').is(':visible')) {
         showHelp();
         return;
@@ -174,7 +188,9 @@ function handleClickTap(x,y) {
             }
             else{
                 if (gameState != 1) {
-                    init(1);
+                    // TreSensa integration
+                    // init(1);
+                    removeWidget(init.bind(null,1));
                 }
             }
             return;
@@ -204,7 +220,9 @@ function handleClickTap(x,y) {
                 resumeGame();
             }
             else {
-                init(1);
+                // TreSensa integration
+                // init(1);
+                removeWidget(init.bind(null,1));
             }
         }
         MainHex.rotate(-1);
