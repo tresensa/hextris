@@ -7,17 +7,11 @@ Contributors:
  - Noah Moroze (@nmoroze)
  - Michael Yang (@themichaelyang)
 
-# Releases
-#### iOS: https://itunes.apple.com/us/app/hextris/id903769553?mt=8
-![](http://i.imgur.com/KBYZcf5.png)
+This is a fork of the Hextris game which includes an integration of the TreSensa Game Services widget. The TreSensa widget extends game features to include publisher specific share features, leaderboards, and ads.
 
-#### Android: https://play.google.com/store/apps/details?id=com.hextris.hextris
-![](http://i.imgur.com/mxj8yKs.png)
+Original version of the game located at https://github.com/Hextris/hextris
 
-## Press kit
-
-http://hextris.github.io/presskit/info.html
 
 ## License
 
-This work is under a GPL v3 license.
+The game source code is covered under a GPL v3 license. The TreSensa libraries are not.
