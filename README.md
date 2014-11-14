@@ -9,6 +9,8 @@ Contributors:
 
 This is a fork of the Hextris game which includes an integration of the TreSensa Game Services widget. The TreSensa widget extends game features to include publisher specific share features, leaderboards, and ads.
 
+Tutorial descibing the integration located at http://developer.tresensa.com/integrating-the-tgs-widget-with-hextris/
+
 Original version of the game located at https://github.com/Hextris/hextris
 
 
